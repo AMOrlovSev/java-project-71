@@ -2,6 +2,7 @@ plugins {
     id("java")
     id("com.github.ben-manes.versions") version "0.52.0"
     id("application")
+    checkstyle
 }
 
 group = "hexlet.code"
@@ -25,4 +26,9 @@ application {
 
 tasks.test {
     useJUnitPlatform()
+}
+
+tasks.check {
+    dependsOn(tasks.checkstyleMain)
+    dependsOn(tasks.checkstyleTest)
 }
