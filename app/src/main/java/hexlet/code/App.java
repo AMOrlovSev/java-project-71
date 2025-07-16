@@ -7,6 +7,7 @@ import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -48,8 +49,8 @@ public class App implements Callable<Integer> {
     @Override
     public Integer call() {
         try {
-            Map<String, Object> map1 = readJsonFile(getPath(file1));
-            Map<String, Object> map2 = readJsonFile(getPath(file2));
+            Map<String, Object> map1 = readJsonFile(resolvePath(file1));
+            Map<String, Object> map2 = readJsonFile(resolvePath(file2));
 
             System.out.println(Differ.generate(map1, map2));
 
@@ -60,21 +61,49 @@ public class App implements Callable<Integer> {
         }
     }
 
-    private static Path getPath(String pathString) {
+//    public static Path resolvePath(String pathString) throws IOException {
+//        if (pathString == null || pathString.trim().isEmpty()) {
+//            throw new IllegalArgumentException("Path cannot be null or empty");
+//        }
+//
+//        Path path = Paths.get(pathString).normalize();
+//
+//        if (!path.isAbsolute()) {
+//            path = Paths.get("").toAbsolutePath()
+//                    .resolve("src/test/resources")
+//                    .resolve(path)
+//                    .normalize();
+//        }
+//
+//        if (!Files.exists(path)) {
+//            throw new FileNotFoundException("Path does not exist: " + path);
+//        }
+//
+//        return path;
+//    }
+
+    public static Path resolvePath(String pathString) throws IOException {
         if (pathString == null || pathString.trim().isEmpty()) {
             throw new IllegalArgumentException("Path cannot be null or empty");
         }
 
         Path path = Paths.get(pathString).normalize();
 
-        //Относительно app/src/main/resources
         if (!path.isAbsolute()) {
-            path = Paths.get("app", "src", "main", "resources").toAbsolutePath().resolve(path).normalize();
+            path = Paths.get("").toAbsolutePath()
+                    .resolve("src/test/resources")
+                    .resolve(path)
+                    .normalize();
         }
+
+        if (!Files.exists(path)) {
+            throw new FileNotFoundException("Path does not exist: " + path);
+        }
+
         return path;
     }
 
-    private Map<String, Object> readJsonFile(Path filePath) throws IOException {
+    public static Map<String, Object> readJsonFile(Path filePath) throws IOException {
         if (!Files.exists(filePath)) {
             throw new IOException("File not found: " + filePath);
         }
