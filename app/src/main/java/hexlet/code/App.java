@@ -47,22 +47,17 @@ public class App implements Callable<Integer> {
 
     @Override
     public Integer call() {
-        // Логика сравнения файлов
         try {
             Map<String, Object> map1 = readJsonFile(getPath(file1));
             Map<String, Object> map2 = readJsonFile(getPath(file2));
 
-            System.out.println(map1);
-            System.out.println(map2);
-
             System.out.println(Differ.generate(map1, map2));
 
-            return 0; // Успешное завершение
+            return CommandLine.ExitCode.OK;
         } catch (IOException e) {
             System.err.println("Error: " + e.getMessage());
-            return 1; // Ошибка выполнения
+            return CommandLine.ExitCode.SOFTWARE;
         }
-
     }
 
     private static Path getPath(String pathString) {
