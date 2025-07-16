@@ -67,9 +67,9 @@ public class App implements Callable<Integer> {
 
         Path path = Paths.get(pathString).normalize();
 
-        //Относительно src/main/resources
+        //Относительно app/src/main/resources
         if (!path.isAbsolute()) {
-            path = Paths.get("src", "main", "resources").toAbsolutePath().resolve(path).normalize();
+            path = Paths.get("app", "src", "main", "resources").toAbsolutePath().resolve(path).normalize();
         }
         return path;
     }
