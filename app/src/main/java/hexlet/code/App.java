@@ -55,8 +55,7 @@ public class App implements Callable<Integer> {
             System.out.println(map1);
             System.out.println(map2);
 
-            System.out.println("Hello World!");
-            System.out.printf("Comparing %s and %s (format: %s)%n", file1, file2, format);
+            System.out.println(Differ.generate(map1, map2));
 
             return 0; // Успешное завершение
         } catch (IOException e) {
