@@ -3,7 +3,7 @@ plugins {
     id("com.github.ben-manes.versions") version "0.52.0"
     id("application")
     checkstyle
-    id("org.sonarqube") version "4.4.1.3373"
+    id("org.sonarqube") version "6.2.0.5505"
 }
 
 group = "hexlet.code"
@@ -23,6 +23,14 @@ dependencies {
 
 application {
     mainClass = "hexlet.code.App"
+}
+
+sonar {
+    properties {
+        property("sonar.projectKey", "java-project-71")
+        property("sonar.organization", "amorlov")
+        property("sonar.host.url", "https://sonarcloud.io")
+    }
 }
 
 tasks.test {
