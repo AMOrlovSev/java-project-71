@@ -27,8 +27,8 @@ application {
 
 sonar {
     properties {
-        property("sonar.projectKey", "java-project-71")
-        property("sonar.organization", "amorlov")
+        property("sonar.projectKey", "AMOrlovSev_java-project-71")
+        property("sonar.organization", "amorlovsev")
         property("sonar.host.url", "https://sonarcloud.io")
     }
 }
