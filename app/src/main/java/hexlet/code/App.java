@@ -5,11 +5,7 @@ import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Map;
 import java.util.concurrent.Callable;
 
@@ -47,8 +43,8 @@ public class App implements Callable<Integer> {
     @Override
     public Integer call() {
         try {
-            Map<String, Object> map1 = Parser.readFileToMap(resolvePath(file1));
-            Map<String, Object> map2 = Parser.readFileToMap(resolvePath(file2));
+            Map<String, Object> map1 = Parser.readFileToMap(Parser.resolvePath(file1));
+            Map<String, Object> map2 = Parser.readFileToMap(Parser.resolvePath(file2));
 
             System.out.println(Differ.generate(map1, map2));
 
@@ -57,27 +53,6 @@ public class App implements Callable<Integer> {
             System.err.println("Error: " + e.getMessage());
             return CommandLine.ExitCode.SOFTWARE;
         }
-    }
-
-    public static Path resolvePath(String pathString) throws IOException {
-        if (pathString == null || pathString.trim().isEmpty()) {
-            throw new IllegalArgumentException("Path cannot be null or empty");
-        }
-
-        Path path = Paths.get(pathString).normalize();
-
-        if (!path.isAbsolute()) {
-            path = Paths.get("").toAbsolutePath()
-                    .resolve("src/test/resources")
-                    .resolve(path)
-                    .normalize();
-        }
-
-        if (!Files.exists(path)) {
-            throw new FileNotFoundException("Path does not exist: " + path);
-        }
-
-        return path;
     }
 
     public static void main(String[] args) {

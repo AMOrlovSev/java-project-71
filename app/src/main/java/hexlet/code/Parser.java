@@ -4,9 +4,11 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Map;
 
 public class Parser {
@@ -51,4 +53,26 @@ public class Parser {
         }
         return fileExt;
     }
+
+    public static Path resolvePath(String pathString) throws IOException {
+        if (pathString == null || pathString.trim().isEmpty()) {
+            throw new IllegalArgumentException("Path cannot be null or empty");
+        }
+
+        Path path = Paths.get(pathString).normalize();
+
+        if (!path.isAbsolute()) {
+            path = Paths.get("").toAbsolutePath()
+                    .resolve("src/test/resources")
+                    .resolve(path)
+                    .normalize();
+        }
+
+        if (!Files.exists(path)) {
+            throw new FileNotFoundException("Path does not exist: " + path);
+        }
+
+        return path;
+    }
+
 }
