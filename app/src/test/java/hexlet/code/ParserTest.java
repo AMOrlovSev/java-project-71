@@ -1,4 +1,5 @@
-import hexlet.code.Parser;
+package hexlet.code;
+
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;

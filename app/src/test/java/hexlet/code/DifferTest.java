@@ -1,5 +1,5 @@
-import hexlet.code.Differ;
-import hexlet.code.Parser;
+package hexlet.code;
+
 import org.junit.jupiter.api.Test;
 import java.nio.file.Files;
 
