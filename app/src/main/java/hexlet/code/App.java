@@ -39,7 +39,7 @@ public class App implements Callable<Integer> {
 
     @Override
     public Integer call() {
-        System.out.println(Differ.generate(file1, file2));
+        System.out.println(Differ.generate(file1, file2, format));
         return 0;
     }
 

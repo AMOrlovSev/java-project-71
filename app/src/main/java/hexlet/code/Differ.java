@@ -13,13 +13,13 @@ public class Differ {
     private static final String UNCHANGED_PREFIX = "  ";
 
 
-    public static String generate(String file1, String file2) {
+    public static String generate(String file1, String file2, String format) {
         Map<String, Object> map1 = new HashMap<>();
         Map<String, Object> map2 = new HashMap<>();
 
         try {
-            map1 = Parser.readFileToMap(Parser.resolvePath(file1));
-            map2 = Parser.readFileToMap(Parser.resolvePath(file2));
+            map1 = Parser.readFileToMap(file1);
+            map2 = Parser.readFileToMap(file2);
         } catch (IOException e) {
             System.err.println("Error: " + e.getMessage());
         }

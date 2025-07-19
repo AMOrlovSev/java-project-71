@@ -13,7 +13,9 @@ import java.util.Map;
 
 public class Parser {
 
-    public static Map<String, Object> readFileToMap(Path filePath) throws IOException {
+    public static Map<String, Object> readFileToMap(String sFilePath) throws IOException {
+        Path filePath = resolvePath(sFilePath);
+
         if (!Files.exists(filePath)) {
             throw new IOException("File not found: " + filePath);
         }
