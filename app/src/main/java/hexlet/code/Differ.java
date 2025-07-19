@@ -1,16 +1,18 @@
 package hexlet.code;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
 public class Differ {
-    private static final String INDENT = "  ";
-    private static final String ADDED_PREFIX = "+ ";
-    private static final String REMOVED_PREFIX = "- ";
-    private static final String UNCHANGED_PREFIX = "  ";
+    private static final String ADDED_PREFIX = "+";
+    private static final String REMOVED_PREFIX = "-";
+    private static final String UNCHANGED_PREFIX = " ";
 
 
     public static String generate(String file1, String file2, String format) {
@@ -24,40 +26,30 @@ public class Differ {
             System.err.println("Error: " + e.getMessage());
         }
 
-
-        StringBuilder result = new StringBuilder("{\n");
-
         Set<String> uniqueKeys = new TreeSet<>();
         uniqueKeys.addAll(map1.keySet());
         uniqueKeys.addAll(map2.keySet());
+
+        List<List<Object>> keyValPrefix = new LinkedList<>();
 
         for (String key : uniqueKeys) {
             Object value1 = map1.get(key);
             Object value2 = map2.get(key);
 
             if (equals(value1, value2)) {
-                appendLine(result, UNCHANGED_PREFIX, key, value1);
+                keyValPrefix.add(Arrays.asList(key, value1, UNCHANGED_PREFIX));
                 continue;
             }
 
             if (map1.containsKey(key)) {
-                appendLine(result, REMOVED_PREFIX, key, value1);
+                keyValPrefix.add(Arrays.asList(key, value1, REMOVED_PREFIX));
             }
             if (map2.containsKey(key)) {
-                appendLine(result, ADDED_PREFIX, key, value2);
+                keyValPrefix.add(Arrays.asList(key, value2, ADDED_PREFIX));
             }
         }
 
-        return result.append("}").toString();
-    }
-
-    private static void appendLine(StringBuilder builder, String prefix, String key, Object value) {
-        builder.append(INDENT)
-                .append(prefix)
-                .append(key)
-                .append(": ")
-                .append(value)
-                .append("\n");
+        return Formater.process(keyValPrefix, format);
     }
 
     private static boolean equals(Object o1, Object o2) {

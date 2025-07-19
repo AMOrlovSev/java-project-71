@@ -6,6 +6,8 @@ import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 import java.util.concurrent.Callable;
 
+import static hexlet.code.Formater.FORMAT_STYLISH;
+
 @Command(
         name = "gendiff",
         description = "Compares two configuration files and shows a difference.",
@@ -32,7 +34,7 @@ public class App implements Callable<Integer> {
     @Option(
             names = {"-f", "--format"},
             description = "output format [default: ${DEFAULT-VALUE}]",
-            defaultValue = "stylish",
+            defaultValue = FORMAT_STYLISH,
             paramLabel = "format"
     )
     private String format;
