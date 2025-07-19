@@ -4,6 +4,7 @@ plugins {
     id("application")
     checkstyle
     id("org.sonarqube") version "6.2.0.5505"
+    jacoco
 }
 
 group = "hexlet.code"
@@ -37,7 +38,14 @@ tasks.test {
     useJUnitPlatform()
 }
 
-tasks.check {
-    dependsOn(tasks.checkstyleMain)
-    dependsOn(tasks.checkstyleTest)
+tasks.test {
+    finalizedBy(tasks.jacocoTestReport) // report is always generated after tests run
+}
+
+tasks.jacocoTestReport {
+    reports {
+        xml.required = true
+        csv.required = false
+        html.outputLocation = layout.buildDirectory.dir("jacocoHtml")
+    }
 }
