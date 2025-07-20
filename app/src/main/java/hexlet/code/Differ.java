@@ -10,9 +10,9 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public class Differ {
-    private static final String ADDED_PREFIX = "+";
-    private static final String REMOVED_PREFIX = "-";
-    private static final String UNCHANGED_PREFIX = " ";
+    public static final String ADDED_PREFIX = "+";
+    public static final String REMOVED_PREFIX = "-";
+    public static final String UNCHANGED_PREFIX = " ";
 
 
     public static String generate(String file1, String file2, String format) {
@@ -49,7 +49,14 @@ public class Differ {
             }
         }
 
-        return Formater.process(keyValPrefix, format);
+        String result = "";
+        try {
+            return Formater.process(keyValPrefix, format);
+        } catch (IOException e) {
+            System.err.println("Error: " + e.getMessage());
+        }
+
+        return result;
     }
 
     private static boolean equals(Object o1, Object o2) {

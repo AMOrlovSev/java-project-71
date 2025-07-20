@@ -1,37 +1,28 @@
 package hexlet.code;
 
+import hexlet.code.formatters.PlainFormater;
+import hexlet.code.formatters.StylishFormater;
+
+import java.io.IOException;
 import java.util.List;
 
 public class Formater {
     public static final String FORMAT_STYLISH = "stylish";
+    public static final String FORMAT_PLAIN = "plain";
 
-    public static String process(List<List<Object>> values, String form) {
+    public static String process(List<List<Object>> values, String form) throws IOException {
         String result = "";
 
         if (form.equals(FORMAT_STYLISH)) {
-            result = stylishFormat(values);
+            result = StylishFormater.format(values);
+        } else if (form.equals(FORMAT_PLAIN)) {
+            result = PlainFormater.format(values);
+        } else {
+            throw new IOException("Not support format: " + form);
         }
 
         return result;
     }
 
-
-    public static String stylishFormat(List<List<Object>> vals) {
-
-        StringBuilder result = new StringBuilder("{\n");
-
-        for (var key : vals) {
-            result.append("  ")
-                    .append(key.getLast())
-                    .append(" ")
-                    .append(key.getFirst())
-                    .append(": ")
-                    .append(key.get(1))
-                    .append("\n");
-
-        }
-
-        return result.append("}").toString();
-    }
 
 }

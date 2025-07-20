@@ -42,7 +42,7 @@ public class Parser {
 
     private static Map<String, Object> convertYamlStringToMap(String yamlString) throws IOException {
         final ObjectMapper yamlMapper = new ObjectMapper(new YAMLFactory());
-        return yamlMapper.readValue(yamlString, Map.class);
+        return yamlMapper.readValue(yamlString, new TypeReference<>() { });
     }
 
     private static String fileExtension(Path filePath) {
