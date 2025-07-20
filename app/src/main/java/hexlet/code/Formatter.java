@@ -1,5 +1,6 @@
 package hexlet.code;
 
+import hexlet.code.formatters.JsonFormatter;
 import hexlet.code.formatters.PlainFormatter;
 import hexlet.code.formatters.StylishFormatter;
 
@@ -16,7 +17,7 @@ public class Formatter {
         return switch (format) {
             case FORMAT_STYLISH -> StylishFormatter.format(diffs);
             case FORMAT_PLAIN -> PlainFormatter.format(diffs);
-//            case FORMAT_JSON -> JsonFormatter.format(diffs);
+            case FORMAT_JSON -> JsonFormatter.format(diffs);
             default -> throw new IOException("Unsupported format: " + format);
         };
     }

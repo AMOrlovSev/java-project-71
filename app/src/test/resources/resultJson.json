@@ -1,57 +1,71 @@
 {
-  "chars2": {
-    "file1": ["d", "e", "f"],
-    "file2": false
+  "chars1" : {
+    "status" : "unchanged"
   },
-  "checked": {
-    "file1": false,
-    "file2": true
+  "chars2" : {
+    "status" : "changed",
+    "oldValue" : [ "d", "e", "f" ],
+    "newValue" : false
   },
-  "default": {
-    "file1": null,
-    "file2": ["value1", "value2"]
+  "checked" : {
+    "status" : "changed",
+    "oldValue" : false,
+    "newValue" : true
   },
-  "id": {
-    "file1": 45,
-    "file2": null
+  "default" : {
+    "status" : "changed",
+    "oldValue" : null,
+    "newValue" : [ "value1", "value2" ]
   },
-  "key1": {
-    "file1": "value1",
-    "file2": null
+  "id" : {
+    "status" : "changed",
+    "oldValue" : 45,
+    "newValue" : null
   },
-  "key2": {
-    "file1": null,
-    "file2": "value2"
+  "key1" : {
+    "status" : "removed",
+    "oldValue" : "value1"
   },
-  "numbers2": {
-    "file1": [2, 3, 4, 5],
-    "file2": [22, 33, 44, 55]
+  "key2" : {
+    "status" : "added",
+    "newValue" : "value2"
   },
-  "numbers3": {
-    "file1": [3, 4, 5],
-    "file2": null
+  "numbers1" : {
+    "status" : "unchanged"
   },
-  "numbers4": {
-    "file1": null,
-    "file2": [4, 5, 6]
+  "numbers2" : {
+    "status" : "changed",
+    "oldValue" : [ 2, 3, 4, 5 ],
+    "newValue" : [ 22, 33, 44, 55 ]
   },
-  "obj1": {
-    "file1": null,
-    "file2": {
-      "isNested": true,
-      "nestedKey": "value"
+  "numbers3" : {
+    "status" : "removed",
+    "oldValue" : [ 3, 4, 5 ]
+  },
+  "numbers4" : {
+    "status" : "added",
+    "newValue" : [ 4, 5, 6 ]
+  },
+  "obj1" : {
+    "status" : "added",
+    "newValue" : {
+      "nestedKey" : "value",
+      "isNested" : true
     }
   },
-  "setting1": {
-    "file1": "Some value",
-    "file2": "Another value"
+  "setting1" : {
+    "status" : "changed",
+    "oldValue" : "Some value",
+    "newValue" : "Another value"
   },
-  "setting2": {
-    "file1": 200,
-    "file2": 300
+  "setting2" : {
+    "status" : "changed",
+    "oldValue" : 200,
+    "newValue" : 300
   },
-  "setting3": {
-    "file1": true,
-    "file2": "none"
+  "setting3" : {
+    "status" : "changed",
+    "oldValue" : true,
+    "newValue" : "none"
   }
 }

@@ -34,4 +34,18 @@ public class DifferTest {
         assertEquals(result, correct);
     }
 
+    @Test
+    public void testGenerateJsonJson() throws Exception {
+        String result = Differ.generate("file1.json", "file2.json", "json");
+        String correct = Files.readString(Parser.resolvePath("resultJson.json"));
+        assertEquals(result, correct);
+    }
+
+    @Test
+    public void testGenerateYamlJson() throws Exception {
+        String result = Differ.generate("file1.yaml", "file2.yaml", "json");
+        String correct = Files.readString(Parser.resolvePath("resultJson.yaml"));
+        assertEquals(result, correct);
+    }
+
 }
