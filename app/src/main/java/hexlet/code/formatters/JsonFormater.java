@@ -2,14 +2,12 @@ package hexlet.code.formatters;
 
 import java.util.List;
 
-import static hexlet.code.Differ.ADDED_PREFIX;
-import static hexlet.code.Differ.REMOVED_PREFIX;
-import static hexlet.code.Differ.UNCHANGED_PREFIX;
+import static hexlet.code.Differ.*;
 
-public class PlainFormater {
+public class JsonFormater {
     public static String format(List<List<Object>> keyValPrefix) {
 
-        StringBuilder result = new StringBuilder("");
+        StringBuilder result = new StringBuilder("{\n");
 
         String keyCurrent = "";
         String keyNext = "";
@@ -26,20 +24,25 @@ public class PlainFormater {
             prefixCurrent = keyValPrefix.get(i).getLast().toString();
 
             if (prefixCurrent.equals(UNCHANGED_PREFIX)) {
+                result.append("\n  \"")
+                        .append(keyCurrent)
+                        .append("\": ")
+                        .append(objectValueToStringJson(valCurrent))
+                        .append(",");
                 continue;
             } else if (keyCurrent.equals(keyNext)) {
                 result.append("\nProperty '")
                         .append(keyCurrent)
                         .append("' was updated. From ")
-                        .append(objectValueToString(valCurrent))
+                        .append(objectValueToStringJson(valCurrent))
                         .append(" to ")
-                        .append(objectValueToString(valNext));
+                        .append(objectValueToStringJson(valNext));
                 i++;
             } else if (prefixCurrent.equals(ADDED_PREFIX)) {
                 result.append("\nProperty '")
                         .append(keyCurrent)
                         .append("' was added with value ")
-                        .append(objectValueToString(valCurrent));
+                        .append(objectValueToStringJson(valCurrent));
             } else if (prefixCurrent.equals(REMOVED_PREFIX)) {
                 result.append("\nProperty '")
                         .append(keyCurrent)
@@ -47,13 +50,13 @@ public class PlainFormater {
             }
         }
 
-        return result.toString();
+        return result.append("}").toString();
     }
 
-    private static String objectValueToString(Object obj) {
+    private static String objectValueToStringJson(Object obj) {
         String result = "";
         if (obj instanceof String) {
-            result = "'" + obj.toString() + "'";
+            result = "\"" + obj.toString() + "\"";
         } else if (obj instanceof Integer || obj instanceof Boolean) {
             result = obj.toString();
         } else if (obj == null) {

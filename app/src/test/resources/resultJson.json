@@ -1,0 +1,57 @@
+{
+  "chars2": {
+    "file1": ["d", "e", "f"],
+    "file2": false
+  },
+  "checked": {
+    "file1": false,
+    "file2": true
+  },
+  "default": {
+    "file1": null,
+    "file2": ["value1", "value2"]
+  },
+  "id": {
+    "file1": 45,
+    "file2": null
+  },
+  "key1": {
+    "file1": "value1",
+    "file2": null
+  },
+  "key2": {
+    "file1": null,
+    "file2": "value2"
+  },
+  "numbers2": {
+    "file1": [2, 3, 4, 5],
+    "file2": [22, 33, 44, 55]
+  },
+  "numbers3": {
+    "file1": [3, 4, 5],
+    "file2": null
+  },
+  "numbers4": {
+    "file1": null,
+    "file2": [4, 5, 6]
+  },
+  "obj1": {
+    "file1": null,
+    "file2": {
+      "isNested": true,
+      "nestedKey": "value"
+    }
+  },
+  "setting1": {
+    "file1": "Some value",
+    "file2": "Another value"
+  },
+  "setting2": {
+    "file1": 200,
+    "file2": 300
+  },
+  "setting3": {
+    "file1": true,
+    "file2": "none"
+  }
+}
