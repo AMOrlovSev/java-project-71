@@ -6,7 +6,7 @@ import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 import java.util.concurrent.Callable;
 
-import static hexlet.code.Formater.FORMAT_STYLISH;
+import static hexlet.code.Formatter.FORMAT_STYLISH;
 
 @Command(
         name = "gendiff",

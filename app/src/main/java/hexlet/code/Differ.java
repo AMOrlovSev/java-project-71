@@ -1,7 +1,6 @@
 package hexlet.code;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -10,14 +9,15 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public class Differ {
-    public static final String ADDED_PREFIX = "+";
-    public static final String REMOVED_PREFIX = "-";
-    public static final String UNCHANGED_PREFIX = " ";
+    public static final String STATUS_ADDED = "added";
+    public static final String STATUS_REMOVED = "removed";
+    public static final String STATUS_UNCHANGED = "unchanged";
+    public static final String STATUS_CHANGED = "changed";
 
 
-    public static String generate(String file1, String file2, String format) {
-        Map<String, Object> map1 = new HashMap<>();
-        Map<String, Object> map2 = new HashMap<>();
+    public static <T> String generate(String file1, String file2, String format) {
+        Map<String, T> map1 = new HashMap<>();
+        Map<String, T> map2 = new HashMap<>();
 
         try {
             map1 = Parser.readFileToMap(file1);
@@ -26,32 +26,37 @@ public class Differ {
             System.err.println("Error: " + e.getMessage());
         }
 
-        Set<String> uniqueKeys = new TreeSet<>();
-        uniqueKeys.addAll(map1.keySet());
-        uniqueKeys.addAll(map2.keySet());
+        Set<String> allKeys = new TreeSet<>();
+        allKeys.addAll(map1.keySet());
+        allKeys.addAll(map2.keySet());
 
-        List<List<Object>> keyValPrefix = new LinkedList<>();
+        List<Map<String, Object>> diffs = new LinkedList<>();
 
-        for (String key : uniqueKeys) {
-            Object value1 = map1.get(key);
-            Object value2 = map2.get(key);
+        for (String key : allKeys) {
+            T value1 = map1.get(key);
+            T value2 = map2.get(key);
+            Map<String, Object> diffEntry = new HashMap<>();
 
-            if (equals(value1, value2)) {
-                keyValPrefix.add(Arrays.asList(key, value1, UNCHANGED_PREFIX));
-                continue;
+            diffEntry.put("key", key);
+            diffEntry.put("oldValue", value1);
+            diffEntry.put("newValue", value2);
+
+            if (!map1.containsKey(key)) {
+                diffEntry.put("status", STATUS_ADDED);
+            } else if (!map2.containsKey(key)) {
+                diffEntry.put("status", STATUS_REMOVED);
+            } else if (equals(value1, value2)) {
+                diffEntry.put("status", STATUS_UNCHANGED);
+            } else {
+                diffEntry.put("status", STATUS_CHANGED);
             }
 
-            if (map1.containsKey(key)) {
-                keyValPrefix.add(Arrays.asList(key, value1, REMOVED_PREFIX));
-            }
-            if (map2.containsKey(key)) {
-                keyValPrefix.add(Arrays.asList(key, value2, ADDED_PREFIX));
-            }
+            diffs.add(diffEntry);
         }
 
         String result = "";
         try {
-            return Formater.process(keyValPrefix, format);
+            return Formatter.process(diffs, format);
         } catch (IOException e) {
             System.err.println("Error: " + e.getMessage());
         }
@@ -59,7 +64,7 @@ public class Differ {
         return result;
     }
 
-    private static boolean equals(Object o1, Object o2) {
+    private static <T> boolean equals(T o1, T o2) {
         if (o1 == null) {
             return o2 == null;
         }

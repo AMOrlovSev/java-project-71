@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class Parser {
 
-    public static Map<String, Object> readFileToMap(String sFilePath) throws IOException {
+    public static <T> Map<String, T> readFileToMap(String sFilePath) throws IOException {
         Path filePath = resolvePath(sFilePath);
 
         if (!Files.exists(filePath)) {
@@ -35,12 +35,12 @@ public class Parser {
         }
     }
 
-    private static Map<String, Object> convertJsonStringToMap(String jsonString) throws IOException {
+    private static <T> Map<String, T> convertJsonStringToMap(String jsonString) throws IOException {
         final ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.readValue(jsonString, new TypeReference<>() { });
     }
 
-    private static Map<String, Object> convertYamlStringToMap(String yamlString) throws IOException {
+    private static <T> Map<String, T> convertYamlStringToMap(String yamlString) throws IOException {
         final ObjectMapper yamlMapper = new ObjectMapper(new YAMLFactory());
         return yamlMapper.readValue(yamlString, new TypeReference<>() { });
     }
