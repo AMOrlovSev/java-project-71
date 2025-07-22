@@ -40,13 +40,16 @@ public class App implements Callable<Integer> {
 
     @Override
     public final Integer call() {
-        System.out.println(Differ.generate(file1, file2, format));
-        return 0;
+        try {
+            System.out.println(Differ.generate(file1, file2, format));
+            return 0;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static void main(String[] args) {
         int exitCode = new CommandLine(new App())
-                //.setUsageHelpLongOptionsMaxWidth(30)
                 .execute(args);
         System.exit(exitCode);
     }
