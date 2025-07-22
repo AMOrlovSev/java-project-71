@@ -16,6 +16,7 @@ import static hexlet.code.Formatter.FORMAT_STYLISH;
         usageHelpAutoWidth = true
 )
 public class App implements Callable<Integer> {
+    public static int helpLongOptionsMaxWidth = 30;
 
     @Parameters(
             index = "0",
@@ -46,7 +47,6 @@ public class App implements Callable<Integer> {
     }
 
     public static void main(String[] args) {
-        int helpLongOptionsMaxWidth = 30;
         int exitCode = new CommandLine(new App())
                 .setUsageHelpLongOptionsMaxWidth(helpLongOptionsMaxWidth)
                 .execute(args);
