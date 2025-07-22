@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import static hexlet.code.Comparator.compareMaps;
+import static hexlet.code.Formatter.FORMAT_STYLISH;
 
 public class Differ {
 
@@ -30,6 +31,10 @@ public class Differ {
         }
 
         return result;
+    }
+
+    public static String generate(String file1, String file2) {
+        return generate(file1, file2, FORMAT_STYLISH);
     }
 }
 
