@@ -3,10 +3,10 @@ package hexlet.code.formatters;
 import java.util.List;
 import java.util.Map;
 
-import static hexlet.code.Differ.STATUS_ADDED;
-import static hexlet.code.Differ.STATUS_CHANGED;
-import static hexlet.code.Differ.STATUS_REMOVED;
-import static hexlet.code.Differ.STATUS_UNCHANGED;
+import static hexlet.code.Comparator.STATUS_ADDED;
+import static hexlet.code.Comparator.STATUS_CHANGED;
+import static hexlet.code.Comparator.STATUS_REMOVED;
+import static hexlet.code.Comparator.STATUS_UNCHANGED;
 
 public class StylishFormatter {
     public static String format(List<Map<String, Object>>  diffs) {
