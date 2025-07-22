@@ -26,7 +26,7 @@ public class PlainFormatter {
                         result.append(String.format("\nProperty '%s' was removed",
                                 key));
                 case STATUS_ADDED ->
-                        result.append(String.format("\nProperty '%s' was added with value %s",
+                        result.append(String.format("\nProperty '%s' was added with value: %s",
                                 key, formatValue(newValue)));
                 case STATUS_CHANGED ->
                     result.append(String.format("\nProperty '%s' was updated. From %s to %s",
