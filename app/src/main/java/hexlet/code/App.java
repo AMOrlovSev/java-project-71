@@ -40,7 +40,7 @@ public class App implements Callable<Integer> {
     private String format;
 
     @Override
-    public Integer call() {
+    public final Integer call() {
         System.out.println(Differ.generate(file1, file2, format));
         return 0;
     }
