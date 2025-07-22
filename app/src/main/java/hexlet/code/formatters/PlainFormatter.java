@@ -36,7 +36,7 @@ public class PlainFormatter {
             }
         }
 
-        return result.toString();
+        return result.toString().trim();
     }
 
     private static String formatValue(Object obj) {
