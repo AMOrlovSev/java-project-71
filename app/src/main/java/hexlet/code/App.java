@@ -16,8 +16,6 @@ import static hexlet.code.Formatter.FORMAT_STYLISH;
         usageHelpAutoWidth = true
 )
 public class App implements Callable<Integer> {
-    public static int helpLongOptionsMaxWidth = 30;
-
     @Parameters(
             index = "0",
             description = "path to first file",
@@ -48,7 +46,7 @@ public class App implements Callable<Integer> {
 
     public static void main(String[] args) {
         int exitCode = new CommandLine(new App())
-                .setUsageHelpLongOptionsMaxWidth(helpLongOptionsMaxWidth)
+                //.setUsageHelpLongOptionsMaxWidth(30)
                 .execute(args);
         System.exit(exitCode);
     }
