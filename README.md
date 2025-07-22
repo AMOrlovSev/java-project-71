@@ -8,6 +8,18 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=AMOrlovSev_java-project-71&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=AMOrlovSev_java-project-71)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=AMOrlovSev_java-project-71&metric=coverage)](https://sonarcloud.io/summary/new_code?id=AMOrlovSev_java-project-71)
 
+## Start
+
+```bash
+make run-dist
+```
+
+## Setup
+
+```bash
+make build
+```
+
 # Вычислитель отличий
 
 Сравнение двух файлов.
