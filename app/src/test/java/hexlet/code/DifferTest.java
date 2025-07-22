@@ -2,7 +2,6 @@ package hexlet.code;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import java.nio.file.Files;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -16,12 +15,13 @@ public class DifferTest {
 
     @BeforeAll
     public static void beforeAll() throws Exception {
-        resultStylishJson = Files.readString(Parser.resolvePath("resultStylish.json"));
-        resultStylishYaml = Files.readString(Parser.resolvePath("resultStylish.yaml"));
-        resultPlainJson = Files.readString(Parser.resolvePath("resultPlain.json"));
-        resultPlainYaml = Files.readString(Parser.resolvePath("resultPlain.yaml"));
-        resultJsonJson = Files.readString(Parser.resolvePath("resultJson.json"));
-        resultJsonYaml = Files.readString(Parser.resolvePath("resultJson.yaml"));
+        resultStylishJson = Differ.readFileToString("resultStylish.json");
+        resultStylishJson = Differ.readFileToString("resultStylish.json");
+        resultStylishYaml = Differ.readFileToString("resultStylish.yaml");
+        resultPlainJson = Differ.readFileToString("resultPlain.json");
+        resultPlainYaml = Differ.readFileToString("resultPlain.yaml");
+        resultJsonJson = Differ.readFileToString("resultJson.json");
+        resultJsonYaml = Differ.readFileToString("resultJson.yaml");
     }
 
     @Test
