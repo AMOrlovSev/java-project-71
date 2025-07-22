@@ -12,7 +12,7 @@
   },
   "timeout" : {
     "status" : "changed",
-    "oldValue" : 50,
+    "oldValue" : "50",
     "newValue" : 20
   },
   "verbose" : {

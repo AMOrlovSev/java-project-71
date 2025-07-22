@@ -46,8 +46,9 @@ public class App implements Callable<Integer> {
     }
 
     public static void main(String[] args) {
+        int helpLongOptionsMaxWidth = 30;
         int exitCode = new CommandLine(new App())
-                .setUsageHelpLongOptionsMaxWidth(30)
+                .setUsageHelpLongOptionsMaxWidth(helpLongOptionsMaxWidth)
                 .execute(args);
         System.exit(exitCode);
     }
